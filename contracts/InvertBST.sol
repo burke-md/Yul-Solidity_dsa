@@ -27,9 +27,12 @@ contract InvertBST {
         insert(0, 12);
     }
 
-    function invertBST(uint256 _idx) public {
+    function invertBSTCaller(uint256 _idx) external {
+        recursiveInverter(_idx);
+    }
 
-        assembly{
+    function recursiveInverter(uint256 _idx) internal {
+          assembly{
             mstore(0x00, 0x00)
             let currentLeftPtr := add(keccak256(0x00, 0x20), add(mul(0x03, _idx), 0x01))
 
@@ -49,7 +52,7 @@ contract InvertBST {
             sstore(currentLeftPtr, currentRightVal)
 
             // Function selector
-            mstore(0x00, 0x30e8364d00000000000000000000000000000000000000000000000000000000)
+            mstore(0x00, 0x91c4ef6300000000000000000000000000000000000000000000000000000000)
             
             if currentLeftVal {
                 mstore(0x04, currentLeftVal)
